@@ -1,0 +1,23 @@
+{
+  "name": "testplaywright_sow_dieng_groupe_12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GalsenBoy38/testplaywright_sow_dieng_groupe_12.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/GalsenBoy38/testplaywright_sow_dieng_groupe_12/issues"
+  },
+  "homepage": "https://github.com/GalsenBoy38/testplaywright_sow_dieng_groupe_12#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^26.6.6"
+  }
+}
