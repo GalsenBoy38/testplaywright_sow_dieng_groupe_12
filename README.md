@@ -7,7 +7,7 @@
 | SOW | Fatimatou |
 | DIENG | Ahmadou |
 
----
+
 
 ## 📋 Contexte
 
@@ -32,8 +32,6 @@ test('S2 - supprimer un produit du panier', async ({ user }) => {
 });
 ```
 
----
-
 ## 🎯 Stratégie
 
 Stratégie complète : **[docs/strategie-tests.md](docs/strategie-tests.md)**.
@@ -55,9 +53,8 @@ Stratégie complète : **[docs/strategie-tests.md](docs/strategie-tests.md)**.
 -   **Les montants sont justes** : sous-total = somme des prix, taxe = 8 %, total = sous-total + taxe (S6).
 -   **La commande laisse une trace exacte** : la facture PDF reprend le destinataire, les articles et les montants (S7).
 
-Non couverts : les autres comptes (`locked_out_user`, `problem_user`…), le tri, le menu latéral, l'apparence, la performance.
+Non couverts : les autres comptes (`locked_out_user`, `problem_user`…)
 
----
 
 ## 🏗️ Le site testé
 
@@ -71,7 +68,6 @@ Non couverts : les autres comptes (`locked_out_user`, `problem_user`…), le tri
 | **Checkout: Overview** | voit le récapitulatif : articles, paiement, livraison, sous-total, taxe, total ; *Finish* |
 | **Checkout: Complete!** | voit « Thank you for your order! » ; *Generate PDF order* (facture), *Back Home* |
 
----
 
 ## 📝 Liste des scénarios
 
@@ -89,7 +85,7 @@ L'utilisateur est toujours connecté au départ (fixture `user`).
 | S8 | Vider le panier | [`tests/cart.spec.ts`](tests/cart.spec.ts) | plus aucun article, badge disparu |
 
 Chaque scénario est écrit en GIVEN / WHEN / THEN, en langage naturel, dans [docs/scenarios.md](docs/scenarios.md).
-Sa traduction étape par étape en méthodes du DSL est dans [docs/dsl-actions-perceptions.md](docs/dsl-actions-perceptions.md) (§3), avec un lien vers le test TypeScript correspondant.
+Sa traduction étape par étape en méthodes du DSL est dans [docs/dsl-actions-perceptions.md](docs/dsl-actions-perceptions.md) , avec un lien vers le test TypeScript correspondant.
 
 ### Cas limites et cas d'erreur
 
@@ -102,7 +98,6 @@ Sa traduction étape par étape en méthodes du DSL est dans [docs/dsl-actions-p
 | Panier vidé automatiquement après la commande | S7 |
 | Pas de bouton « Vider » : vider = retirer chaque article | S8 |
 
----
 
 ## 🧩 Le DSL de test
 
@@ -184,7 +179,6 @@ Playwright           page, locator, click…
 -   **La facture PDF** est téléchargée par `generateInvoice()`, enregistrée dans le dossier du test, puis lue avec `pdf-parse` par `InvoiceReader`.
 -   **Fixture `user`** : chaque test part d'un navigateur neuf, connecté, panier vide ; les tests sont indépendants et parallèles.
 
----
 
 ## 📁 Structure du projet
 
@@ -217,7 +211,6 @@ Playwright           page, locator, click…
 | [`strategie-tests.md`](docs/strategie-tests.md) | stratégie de test et d'implémentation |
 | [`prompts.md`](docs/prompts.md) | prompts utilisés et corrections apportées |
 
----
 
 ## 🚀 Installation et exécution
 
@@ -237,7 +230,6 @@ npm run typecheck                         # vérification des types (tsc)
 
 Les tests tournent aussi à chaque push via GitHub Actions (`.github/workflows/playwright.yml`).
 
----
 
 ## 🛠️ Outillage
 
@@ -246,18 +238,3 @@ Les tests tournent aussi à chaque push via GitHub Actions (`.github/workflows/p
 | **Cours VA** | méthode : tests en boîte noire, scénarios GIVEN / WHEN / THEN, glossaire pour éviter les termes flous (produit ≠ article), DSL en actions / perceptions |
 | **Stratégie** | [docs/strategie-tests.md](docs/strategie-tests.md) |
 | **LLM : Claude (chat claude.ai)** | rédaction du glossaire, du DSL et de la stratégie à partir de nos scénarios, puis première implémentation. Prompts essentiels : [docs/prompts.md](docs/prompts.md) |
-| **Agent : Claude Code** | travaille directement dans le dépôt : a relevé sur le site réel les libellés, messages et montants (actions et perceptions), relu les documents produits par le chat, installé les dépendances, lancé les tests sur les 3 navigateurs et corrigé les échecs (détail dans [docs/prompts.md](docs/prompts.md)) |
-
-### Comment nous avons travaillé avec l'IA
-
-1.  **Nous** avons identifié les 8 scénarios, validés par l'enseignant.
-2.  L'**agent** a relevé sur le site les actions et les perceptions de chaque scénario.
-3.  Le **chat** a produit le glossaire, le DSL et la stratégie ; l'**agent** les a relus et nous avons corrigé 5 points.
-4.  Le **chat** a écrit le code ; l'**agent** l'a exécuté : 23 tests sur 26 passaient, 4 corrections ont suffi.
-
-### Nous restons responsables de ce que nous rendons
-
--   toutes les valeurs attendues (prix, messages, totaux, contenu de la facture) ont été **vérifiées sur le site réel** ;
--   nous avons **relu le code** du DSL et des tests et **lancé les tests nous-mêmes** (`npx playwright test --ui`) ;
--   nous avons **cassé un test volontairement** (prix modifié) pour vérifier qu'il échoue ;
--   les tests ne contiennent aucun appel direct à Playwright : `grep -rnE 'page\.|locator|click\(' tests/` ne renvoie rien.
