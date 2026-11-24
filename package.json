@@ -1,9 +1,14 @@
 {
   "name": "testplaywright_sow_dieng_groupe_12",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tests IHM de Sauce Demo avec Playwright et un DSL (actions / perceptions)",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "typecheck": "tsc -p .",
+    "report": "playwright show-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GalsenBoy38/testplaywright_sow_dieng_groupe_12.git"
@@ -18,6 +23,8 @@
   "homepage": "https://github.com/GalsenBoy38/testplaywright_sow_dieng_groupe_12#readme",
   "devDependencies": {
     "@playwright/test": "^1.65.1",
-    "@types/node": "^26.6.6"
+    "@types/node": "^26.6.6",
+    "pdf-parse": "^2.4.5",
+    "typescript": "^7.0.2"
   }
 }
